@@ -4,5 +4,6 @@ module com.mycompany.exameninterfaces {
     requires java.base;
 
     opens com.mycompany.exameninterfaces to javafx.fxml;
+    opens models;
     exports com.mycompany.exameninterfaces;
 }

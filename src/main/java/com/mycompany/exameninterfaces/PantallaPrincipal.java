@@ -17,6 +17,8 @@ import javafx.scene.control.SpinnerValueFactory.IntegerSpinnerValueFactory;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import models.Persona;
 
 public class PantallaPrincipal implements Initializable {
@@ -38,21 +40,21 @@ public class PantallaPrincipal implements Initializable {
     @FXML
     private TableView<Persona> tabla;
     @FXML
-    private TableColumn<String, String> cNombre;
+    private TableColumn<Persona, String> cNombre;
     @FXML
-    private TableColumn<String, String> cSexo;
+    private TableColumn<Persona, String> cSexo;
     @FXML
-    private TableColumn<Integer, Integer> cEdad;
+    private TableColumn<Persona, Integer> cEdad;
     @FXML
-    private TableColumn<Double, Double> cPeso;
+    private TableColumn<Persona, Integer> cPeso;
     @FXML
-    private TableColumn<Double, Double> cAltura;
+    private TableColumn<Persona, Integer> cAltura;
     @FXML
-    private TableColumn<String, String> cActividad;
+    private TableColumn<Persona, String> cActividad;
     @FXML
-    private TableColumn<Double, Double> cGER;
+    private TableColumn<Persona, Double> cGER;
     @FXML
-    private TableColumn<Double, Double> cGET;
+    private TableColumn<Persona, Double> cGET;
     
     
     @FXML
@@ -65,20 +67,38 @@ public class PantallaPrincipal implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         
         llenarCombos();
+        inicializarTabla();
         
 
     }
     
     
     
+    private void inicializarTabla(){
+        
+        cNombre.setCellValueFactory(new PropertyValueFactory("nombre"));
+        cSexo.setCellValueFactory(new PropertyValueFactory("sexo"));
+        cEdad.setCellValueFactory(new PropertyValueFactory("edad"));
+        cPeso.setCellValueFactory(new PropertyValueFactory("peso"));
+        cAltura.setCellValueFactory(new PropertyValueFactory("altura"));
+        cActividad.setCellValueFactory(new PropertyValueFactory("actividad"));
+        cGER.setCellValueFactory(new PropertyValueFactory("ger"));
+        cGET.setCellValueFactory(new PropertyValueFactory("get"));
+    }
+    
+    private void poblarTabla(){
+        
+        ArrayList<Persona> listaPersonas = new ArrayList<>();
+        
+        listaPersonas = personas;
+        
+        tabla.getItems().clear();
+        tabla.getItems().addAll(personas);
+        
+    }
     
 
-    
-    
-    
-    
-    
-    private void llenarCombos(){
+    private void llenarCombos() {
         //comboSexo
         ObservableList<String> listaSexo = FXCollections.observableArrayList();
         listaSexo.add("Hombre");
@@ -103,11 +123,6 @@ public class PantallaPrincipal implements Initializable {
         
         SpinnerValueFactory listaAltura = new IntegerSpinnerValueFactory(0, 200, 0, 10);
         spAltura.setValueFactory(listaAltura);
-        
-        
-        
-        
-        
         
     }
     
@@ -134,7 +149,7 @@ public class PantallaPrincipal implements Initializable {
             p.setSexo(sexo);
             p.setEdad(edad);
             p.setPeso(peso);
-            p.setAltura(peso);
+            p.setAltura(altura);
             p.setActividad(actividad);
            
             return p;
@@ -143,17 +158,47 @@ public class PantallaPrincipal implements Initializable {
 
     @FXML
     private void añadirPersona(ActionEvent event) {
-        
-        personaActual = leerFormulario();
-        personas.add(personaActual);
-        System.out.println(personas.toString());
+
+        if (leerFormulario() != null) {
+
+            personaActual = leerFormulario();
+            personas.add(personaActual);
+            
+            personaActual.calcularFactorActividad();
+            personaActual.calcularGER();
+            personaActual.calcutarGET();
+
+            poblarTabla();
+            borrarFormulario();
+        }
+
         
         
         
         
     }
+   
+    private void borrarFormulario() {
 
-    
+        txtNombre.setText("");
+        llenarCombos();
+
+    }
+
+    @FXML
+    private void SeleccionarPersona(MouseEvent event) {
+        
+        Persona persona = tabla.getSelectionModel().getSelectedItem();
+        personaActual = persona;
+        
+        if(persona != null){
+            
+            System.out.println("estoy seleccionando esta persona: "+persona);
+    }
+        
+    }
+
+
     
     
 }

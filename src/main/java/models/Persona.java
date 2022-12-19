@@ -1,17 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package models;
 
 import java.io.Serializable;
 
-/**
- *
- * @author Syzer
- */
+
 public class Persona implements Serializable {
-    
+
     String nombre;
     String sexo;
     Integer edad;
@@ -20,6 +14,60 @@ public class Persona implements Serializable {
     Double ger;
     Double get;
     String actividad;
+    double factorActividad;
+    
+
+    public void calcularFactorActividad() {
+
+        if ("Hombre".equalsIgnoreCase(sexo)) {
+
+            if ("Muy ligera".equalsIgnoreCase(actividad)) {
+                factorActividad = 1.3;
+            } else if ("Ligera".equalsIgnoreCase(actividad)) {
+
+                factorActividad = 1.3;
+            } else if ("Moderada".equalsIgnoreCase(actividad)) {
+
+                factorActividad = 1.7;
+            } else if ("Intensa".equalsIgnoreCase(actividad)) {
+
+                factorActividad = 2.1;
+            }
+
+        } else {
+            if ("Muy ligera".equalsIgnoreCase(actividad)) {
+                factorActividad = 1.3;
+            } else if ("Ligera".equalsIgnoreCase(actividad)) {
+
+                factorActividad = 1.5;
+            } else if ("Moderada".equalsIgnoreCase(actividad)) {
+
+                factorActividad = 1.6;
+            } else if ("Intensa".equalsIgnoreCase(actividad)) {
+
+                factorActividad = 1.9;
+            }
+
+        }
+
+    }
+    
+    public void calcularGER(){
+        
+        if("Hombre".equalsIgnoreCase(sexo)){
+            ger = (altura * 6.25) + (peso * 10) - (edad * 5) + 5;
+
+        } else {
+            ger = (altura * 6.25) + (peso * 10) - (edad * 5) + 655.0955;
+        }
+
+    }
+    
+    public void calcutarGET(){
+        
+        get = ger*factorActividad;
+        
+    }
 
     public String getNombre() {
         return nombre;
@@ -89,11 +137,5 @@ public class Persona implements Serializable {
     public String toString() {
         return "Persona{" + "nombre=" + nombre + ", sexo=" + sexo + ", edad=" + edad + ", peso=" + peso + ", altura=" + altura + ", ger=" + ger + ", get=" + get + ", actividad=" + actividad + '}';
     }
-    
-    
 
-    
-    
-    
-    
 }
