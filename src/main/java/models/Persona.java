@@ -1,8 +1,6 @@
-
 package models;
 
 import java.io.Serializable;
-
 
 public class Persona implements Serializable {
 
@@ -15,7 +13,6 @@ public class Persona implements Serializable {
     Double get;
     String actividad;
     double factorActividad;
-    
 
     public void calcularFactorActividad() {
 
@@ -51,10 +48,10 @@ public class Persona implements Serializable {
         }
 
     }
-    
-    public void calcularGER(){
-        
-        if("Hombre".equalsIgnoreCase(sexo)){
+
+    public void calcularGER() {
+
+        if ("Hombre".equalsIgnoreCase(sexo)) {
             ger = (altura * 6.25) + (peso * 10) - (edad * 5) + 5;
 
         } else {
@@ -62,11 +59,11 @@ public class Persona implements Serializable {
         }
 
     }
-    
-    public void calcutarGET(){
-        
-        get = ger*factorActividad;
-        
+
+    public void calcutarGET() {
+
+        get = ger * factorActividad;
+
     }
 
     public String getNombre() {

@@ -55,27 +55,23 @@ public class PantallaPrincipal implements Initializable {
     private TableColumn<Persona, Double> cGER;
     @FXML
     private TableColumn<Persona, Double> cGET;
-    
-    
+
     @FXML
     private Label info;
-    
+
     Persona personaActual = null;
     ArrayList<Persona> personas = new ArrayList<>();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+
         llenarCombos();
         inicializarTabla();
-        
 
     }
-    
-    
-    
-    private void inicializarTabla(){
-        
+
+    private void inicializarTabla() {
+
         cNombre.setCellValueFactory(new PropertyValueFactory("nombre"));
         cSexo.setCellValueFactory(new PropertyValueFactory("sexo"));
         cEdad.setCellValueFactory(new PropertyValueFactory("edad"));
@@ -85,18 +81,17 @@ public class PantallaPrincipal implements Initializable {
         cGER.setCellValueFactory(new PropertyValueFactory("ger"));
         cGET.setCellValueFactory(new PropertyValueFactory("get"));
     }
-    
-    private void poblarTabla(){
-        
+
+    private void poblarTabla() {
+
         ArrayList<Persona> listaPersonas = new ArrayList<>();
-        
+
         listaPersonas = personas;
-        
+
         tabla.getItems().clear();
         tabla.getItems().addAll(personas);
-        
+
     }
-    
 
     private void llenarCombos() {
         //comboSexo
@@ -104,7 +99,7 @@ public class PantallaPrincipal implements Initializable {
         listaSexo.add("Hombre");
         listaSexo.add("Mujer");
         comboSexo.setItems(listaSexo);
-        
+
         //comboActividad
         ObservableList<String> tipoActividad = FXCollections.observableArrayList();
         tipoActividad.add("Muy Ligera");
@@ -112,33 +107,30 @@ public class PantallaPrincipal implements Initializable {
         tipoActividad.add("Moderada");
         tipoActividad.add("Intensa");
         comboActividad.setItems(tipoActividad);
-        
-        //rellenarSpinner
 
+        //rellenarSpinner
         SpinnerValueFactory listaEdad = new IntegerSpinnerValueFactory(18, 99, 0, 1);
         spEdad.setValueFactory(listaEdad);
-        
+
         SpinnerValueFactory listaPeso = new IntegerSpinnerValueFactory(0, 120, 0, 1);
         spPeso.setValueFactory(listaPeso);
-        
+
         SpinnerValueFactory listaAltura = new IntegerSpinnerValueFactory(0, 200, 0, 10);
         spAltura.setValueFactory(listaAltura);
-        
-    }
-    
-     private Persona leerFormulario() {
 
-         String nombre = txtNombre.getText();
-         String sexo = comboSexo.getValue();
-         Integer edad = spEdad.getValue();
-         Integer peso = spPeso.getValue();
-         Integer altura = spAltura.getValue();
-         String actividad = comboActividad.getValue();
-         
-   
+    }
+
+    private Persona leerFormulario() {
+
+        String nombre = txtNombre.getText();
+        String sexo = comboSexo.getValue();
+        Integer edad = spEdad.getValue();
+        Integer peso = spPeso.getValue();
+        Integer altura = spAltura.getValue();
+        String actividad = comboActividad.getValue();
 
         if ("".equals(nombre) || "".equals(sexo) || edad == 0
-            || peso == 0 || altura == 0 || "".equals(actividad)) {
+                || peso == 0 || altura == 0 || "".equals(actividad)) {
             info.setText("Faltan Datos");
             info.setStyle("-fx-background-color:red; -fx-text-fill:white;");
             return null;
@@ -151,7 +143,7 @@ public class PantallaPrincipal implements Initializable {
             p.setPeso(peso);
             p.setAltura(altura);
             p.setActividad(actividad);
-           
+
             return p;
         }
     }
@@ -163,7 +155,7 @@ public class PantallaPrincipal implements Initializable {
 
             personaActual = leerFormulario();
             personas.add(personaActual);
-            
+
             personaActual.calcularFactorActividad();
             personaActual.calcularGER();
             personaActual.calcutarGET();
@@ -172,12 +164,8 @@ public class PantallaPrincipal implements Initializable {
             borrarFormulario();
         }
 
-        
-        
-        
-        
     }
-   
+
     private void borrarFormulario() {
 
         txtNombre.setText("");
@@ -187,18 +175,15 @@ public class PantallaPrincipal implements Initializable {
 
     @FXML
     private void SeleccionarPersona(MouseEvent event) {
-        
+
         Persona persona = tabla.getSelectionModel().getSelectedItem();
         personaActual = persona;
-        
-        if(persona != null){
-            
-            System.out.println("estoy seleccionando esta persona: "+persona);
-    }
-        
+
+        if (persona != null) {
+
+            System.out.println("estoy seleccionando esta persona: " + persona);
+        }
+
     }
 
-
-    
-    
 }
