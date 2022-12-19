@@ -16,7 +16,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane prefHeight="832.0" prefWidth="1293.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.exameninterfaces.PantallaPrincipal">
    <top>
       <VBox alignment="TOP_CENTER" prefHeight="132.0" prefWidth="1293.0" BorderPane.alignment="CENTER">
@@ -65,7 +64,7 @@
                   <TextField fx:id="txtNombre" prefHeight="25.0" prefWidth="136.0" GridPane.columnIndex="1" />
                </children>
             </GridPane>
-            <Button fx:id="btnAñadir" alignment="CENTER" mnemonicParsing="false" text="Añadir a la tabla" />
+            <Button fx:id="btnAñadir" alignment="CENTER" mnemonicParsing="false" onAction="#añadirPersona" text="Añadir a la tabla" />
          </children>
          <BorderPane.margin>
             <Insets left="20.0" />
@@ -78,7 +77,7 @@
             <Insets left="20.0" right="20.0" />
          </BorderPane.margin>
          <children>
-            <TableView id="tabla" fx:id="tabla" minHeight="-Infinity" onMouseClicked="#seleccionarEmpresa" prefHeight="656.0" prefWidth="1014.0" stylesheets="@../../../../../../../GestorEmpresasDual/src/main/resources/com/mycompany/loginfxml/stilo.css">
+            <TableView id="tabla" fx:id="tabla" minHeight="-Infinity" prefHeight="656.0" prefWidth="1014.0">
                <columns>
                   <TableColumn fx:id="cNombre" prefWidth="90.0" text="Nombre" />
                   <TableColumn fx:id="cSexo" prefWidth="248.0" text="Sexo" />
@@ -97,7 +96,7 @@
       </Pane>
    </center>
    <bottom>
-      <Label alignment="CENTER" contentDisplay="CENTER" text="Información del programa" BorderPane.alignment="TOP_CENTER">
+      <Label fx:id="info" alignment="CENTER" contentDisplay="CENTER" text="Información del programa" BorderPane.alignment="TOP_CENTER">
          <font>
             <Font size="15.0" />
          </font>
