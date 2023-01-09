@@ -52,10 +52,10 @@ public class Persona implements Serializable {
     public void calcularGER() {
 
         if ("Hombre".equalsIgnoreCase(sexo)) {
-            ger = (altura * 6.25) + (peso * 10) - (edad * 5) + 5;
+            ger = 66.473 + (13.751 * peso) + (5.0033 * altura) - (6.755 * edad);
 
         } else {
-            ger = (altura * 6.25) + (peso * 10) - (edad * 5) + 655.0955;
+            ger = 655.0955 + (9.463 * peso) + (1.8496 * altura) - (4.6756 * edad);
         }
 
     }
